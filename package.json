@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.3",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxtjs/tailwindcss": "^6.6.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nuxt": "^3.3.1",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "apexcharts": "^3.37.3",
+    "daisyui": "^2.51.5",
+    "firebase": "^9.18.0",
+    "lodash": "^4.17.21",
+    "vue3-apexcharts": "^1.4.1"
+  }
+}
