@@ -57,6 +57,7 @@
         </div>
         <div class="flex flex-col w-full flex-initial m-0 md:m-5 h-screen">
           <div class="flex m-3 w-full">
+            {{ top4Amalan }}
             <table class="table table-zebra w-full">
               <!-- head -->
               <thead>
@@ -131,13 +132,14 @@
     <div class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Submit your Amalan today</h3>
-        <form @submit.prevent="">
+        <form @submit.prevent="handleSubmit()">
           <div class="form-control">
             <label class="label">
               <span class="label-text">Tahajud</span>
             </label>
             <label class="input-group w-full m-3">
               <input
+                v-model="payload.tahajud"
                 type="number"
                 placeholder="10"
                 class="input input-bordered w-full"
@@ -151,6 +153,7 @@
             </label>
             <label class="input-group w-full m-3">
               <input
+                v-model="payload.rawatib"
                 type="number"
                 placeholder="10"
                 class="input input-bordered w-full"
@@ -164,6 +167,7 @@
             </label>
             <label class="input-group w-full m-3">
               <input
+                v-model="payload.dhuha"
                 type="number"
                 placeholder="10"
                 class="input input-bordered w-full"
@@ -177,6 +181,7 @@
             </label>
             <label class="input-group w-full m-3">
               <input
+                v-model="payload.mengaji"
                 type="number"
                 placeholder="10"
                 class="input input-bordered w-full"
@@ -190,6 +195,7 @@
             </label>
             <label class="input-group w-full m-3">
               <input
+                v-model="payload.infaq"
                 type="number"
                 placeholder="10"
                 class="input input-bordered w-full"
@@ -199,9 +205,7 @@
           </div>
           <div class="modal-action">
             <label for="my-modal" class="btn">Cancel</label>
-            <label for="my-modal" type="submit" class="btn btn-primary"
-              >Done!</label
-            >
+            <button type="submit" class="btn btn-primary">Done!</button>
           </div>
         </form>
       </div>
@@ -210,7 +214,7 @@
 </template>
 
 <script setup>
-import { useUsers } from '#imports'
+import { useUsers, useAmal } from '#imports'
 import { useState } from 'nuxt/app'
 import { ref, computed } from 'vue'
 
@@ -224,6 +228,7 @@ const userList = computed(() => {
   }
   return undefined
 })
+const profile = useState('profile')
 
 const chartOptions = ref({
   chart: {
@@ -239,4 +244,24 @@ const series = ref([
     data: [30, 40, 35, 50, 49, 60, 70, 91]
   }
 ])
+
+const payload = ref({
+  uid: undefined,
+  tahajud: 0,
+  rawatib: 0,
+  dhuha: 0,
+  mengaji: 0,
+  infaq: 0
+})
+
+const { submitAmal, top4Amal } = await useAmal()
+
+const handleSubmit = () => {
+  payload.value.uid = profile.value.uid
+  submitAmal(payload.value)
+    .then(() => alert('Berhasil Menyimpan Data'))
+    .catch((err) => alert(err))
+}
+
+const top4Amalan = top4Amal()
 </script>

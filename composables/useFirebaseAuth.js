@@ -26,14 +26,14 @@ export default function () {
             const user = result.user
             writeUserData(user.uid, user.displayName, user.email, user.photoURL)
             profile.value = {
-              uid: result.user.id,
+              uid: result.user.uid,
               username: user.displayName,
               email: user.email,
               profile_picture: user.photoURL,
               exp: 0
             }
           } else {
-            profile.value = { ...snapshot.val(), uid: result.user.id }
+            profile.value = { ...snapshot.val(), uid: result.user.uid }
           }
         })
         return navigateTo('/')

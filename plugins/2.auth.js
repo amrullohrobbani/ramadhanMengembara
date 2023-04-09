@@ -28,7 +28,7 @@ export default defineNuxtPlugin(() => {
             const userRef = ref($database, `users/${user.uid}`)
             onValue(userRef, (snapshot) => {
               if (snapshot.exists()) {
-                profile.value = { ...snapshot.val(), uid: user.id }
+                profile.value = { ...snapshot.val(), uid: user.uid }
               }
             })
           }
