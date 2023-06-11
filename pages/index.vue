@@ -1,7 +1,9 @@
 <template>
   <div data-theme="night" class="overflow-x-hidden">
     <NavbarTop></NavbarTop>
-    <div class="h-screen pt-[4rem] mx-auto bg-base-content overflow-y-hidden">
+    <div
+      class="h-auto md:h-screen pt-[4rem] mx-auto bg-base-content overflow-y-hidden"
+    >
       <div class="flex w-full flex-col md:flex-row h-full">
         <div
           class="flex flex-initial m-0 md:ml-5 md:my-5 w-screen md:w-full overflow-x-auto"
