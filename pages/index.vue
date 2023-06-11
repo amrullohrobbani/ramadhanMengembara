@@ -1,111 +1,91 @@
 <template>
   <div data-theme="night" class="overflow-x-hidden">
     <NavbarTop></NavbarTop>
-    <div class="hero min-h-screen mx-auto bg-base-content">
-      <div class="flex w-full flex-col md:flex-row">
+    <div class="h-screen pt-[4rem] mx-auto bg-base-content overflow-y-hidden">
+      <div class="flex w-full flex-col md:flex-row h-full">
         <div
-          class="flex w-full flex-initial m-0 md:m-5 h-screen w-screen md:w-full overflow-x-auto"
+          class="flex flex-initial m-0 md:m-5 w-screen md:w-full overflow-x-auto"
         >
-          <div class="w-full m-3">
-            <table v-if="userList" class="table w-full">
-              <!-- head -->
-              <thead>
-                <tr>
-                  <th colspan="3">Top Player</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <tr v-for="(user, index) in userList" :key="user?.uid">
-                  <td>
-                    <img
-                      v-if="[1, 2, 3].includes(index + 1)"
-                      :src="ranking(index + 1)"
-                      :alt="index + 1"
-                    />
-                    <h2 v-else>
-                      {{ index + 1 }}
-                    </h2>
-                  </td>
-                  <td>
-                    <div class="flex items-center space-x-3">
-                      <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
-                          <img :src="user?.profile_picture" alt="Avatar" />
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-bold">{{ user?.username }}</div>
+          <table
+            v-if="userList"
+            class="table w-full table-pin-rows rounded mt-3"
+          >
+            <thead>
+              <tr>
+                <th colspan="3">Top Player</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(user, index) in userList" :key="user?.uid">
+                <td class="text-center">
+                  <img
+                    v-if="[1, 2, 3].includes(index + 1)"
+                    :src="ranking(index + 1)"
+                    :alt="index + 1"
+                  />
+                  <h2 v-else>
+                    {{ index + 1 }}
+                  </h2>
+                </td>
+                <td>
+                  <div class="flex items-center space-x-3">
+                    <div class="avatar">
+                      <div class="mask mask-squircle w-12 h-12">
+                        <img :src="user?.profile_picture" alt="Avatar" />
                       </div>
                     </div>
-                  </td>
-                  <th>
-                    <div class="flex items-center space-x-3">
-                      <div>lvl. {{ level(user?.exp) }}</div>
-                      <div class="flex items-center flex-initial w-28">
-                        <EmblemComponents :exp="user?.exp" />
-                      </div>
-                      <div>
-                        <div class="font-bold">{{ user?.exp }}</div>
+                    <div>
+                      <div class="font-bold capitalize">
+                        {{ user?.username }}
                       </div>
                     </div>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </td>
+                <th>
+                  <div class="flex items-center space-x-3">
+                    <div>lvl. {{ level(user?.exp) }}</div>
+                    <div class="flex items-center flex-initial w-28">
+                      <EmblemComponents :exp="user?.exp" />
+                    </div>
+                    <div>
+                      <div class="font-bold">{{ user?.exp }}</div>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="flex flex-col w-full flex-initial m-0 md:m-5 h-screen">
-          <div class="flex m-3 w-full">
-            {{ top4Amalan }}
-            <table class="table table-zebra w-full">
+        <div
+          class="flex flex-col w-full flex-initial m-0 md:m-5 h-full pr-0 md:pr-3"
+        >
+          <div class="flex m-3 w-full h-50 overflow-y-auto">
+            <table class="table table-zebra w-full table-pin-rows">
               <!-- head -->
               <thead>
                 <tr>
-                  <th colspan="4">My Top 3 Amalan</th>
+                  <th colspan="3">Top Amalan</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- row 1 -->
-                <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>Quality Control Specialist</td>
-                  <td>
-                    <img
-                      v-if="[1, 2, 3].includes(index + 1)"
-                      :src="ranking(index + 1)"
-                      :alt="index + 1"
-                    />
-                  </td>
-                </tr>
-                <!-- row 2 -->
-                <tr>
-                  <th>2</th>
-                  <td>Hart Hagerty</td>
-                  <td>Desktop Support Technician</td>
-                  <td>Purple</td>
-                </tr>
-                <!-- row 3 -->
-                <tr>
-                  <th>3</th>
-                  <td>Brice Swyre</td>
-                  <td>Tax Accountant</td>
-                  <td>Red</td>
+                <tr v-for="(value, key, index) in topAmalan" :key="key">
+                  <th>{{ index + 1 }}</th>
+                  <td class="capitalize">{{ key }}</td>
+                  <td>{{ value }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="flex m-3 w-full">
-            <div class="card card-compac w-full bg-base-100 shadow-xl">
-              <div class="card-body">
-                <apexchart
-                  width="500"
-                  type="line"
-                  :options="chartOptions"
-                  :series="series"
-                ></apexchart>
-              </div>
+            <div
+              class="card card-compac w-full h-50 pt-5 bg-base-100 shadow-xl"
+            >
+              <apexchart
+                height="250"
+                type="line"
+                :options="chartOptions"
+                :series="series"
+              ></apexchart>
             </div>
           </div>
         </div>
@@ -132,7 +112,7 @@
     <div class="modal">
       <div class="modal-box">
         <h3 class="font-bold text-lg">Submit your Amalan today</h3>
-        <form @submit.prevent="handleSubmit()">
+        <form @submit.stop.prevent="handleSubmit()">
           <div class="form-control">
             <label class="label">
               <span class="label-text">Tahajud</span>
@@ -217,9 +197,11 @@
 import { useUsers, useAmal } from '#imports'
 import { useState } from 'nuxt/app'
 import { ref, computed } from 'vue'
+import { startWindToast } from '@mariojgt/wind-notify/packages/index.js'
 
 const { ranking, level } = await useUsers()
 const users = useState('users')
+const myProgress = useState('myProgress', () => [])
 const userList = computed(() => {
   if (users?.value) {
     return Object.values(users.value).sort((a, b) => {
@@ -232,16 +214,16 @@ const profile = useState('profile')
 
 const chartOptions = ref({
   chart: {
-    id: 'vuechart-example'
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+    id: 'vuechart-example',
+    toolbar: {
+      show: false
+    }
   }
 })
-const series = ref([
+const series = computed(() => [
   {
-    name: 'series-1',
-    data: [30, 40, 35, 50, 49, 60, 70, 91]
+    name: 'My Progress',
+    data: myProgress.value
   }
 ])
 
@@ -254,14 +236,48 @@ const payload = ref({
   infaq: 0
 })
 
-const { submitAmal, top4Amal } = await useAmal()
+const { submitAmal, topAmal, amalanProgress } = await useAmal()
+const topAmalan = useState('topAmalan')
 
 const handleSubmit = () => {
   payload.value.uid = profile.value.uid
   submitAmal(payload.value)
-    .then(() => alert('Berhasil Menyimpan Data'))
-    .catch((err) => alert(err))
+    .then(() => {
+      startWindToast('', 'Berhasil Submit', 'success', 60, 'bottom')
+    })
+    .catch((err) => {
+      startWindToast('', err, 'error', 60, 'bottom')
+    })
 }
 
-const top4Amalan = top4Amal()
+watch(users, () => {
+  topAmal()
+  amalanProgress()
+})
 </script>
+
+<style scoped>
+@tailwind base;
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+</style>

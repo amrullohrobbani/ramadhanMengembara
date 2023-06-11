@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [],
+  content: ['./node_modules/@mariojgt/wind-notify/packages/toasts/messages.js'],
   theme: {
     extend: {}
   },
