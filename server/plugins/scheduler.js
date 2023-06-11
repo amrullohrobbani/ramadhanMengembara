@@ -45,7 +45,7 @@ function startScheduler(database) {
             .some((date) => {
               return date > today
             })
-          if (isSubmitted) {
+          if (!isSubmitted) {
             const newData = {
               uid: Object.values(item).map((item) => item.uid)[0],
               tahajud: 0,
