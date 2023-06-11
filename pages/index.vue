@@ -194,6 +194,10 @@ import { useState } from 'nuxt/app'
 import { ref, computed } from 'vue'
 import { startWindToast } from '@mariojgt/wind-notify/packages/index.js'
 
+useHead({
+  title: 'Ramadhan Mengembara'
+})
+
 const { ranking, level, rank } = await useUsers()
 const users = useState('users')
 const myProgress = useState('myProgress', () => [])

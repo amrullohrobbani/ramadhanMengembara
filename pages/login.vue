@@ -31,6 +31,10 @@
 import { useFirebaseAuth } from '#imports'
 import { useNuxtApp, useState } from 'nuxt/app'
 
+useHead({
+  title: 'Login | Ramadhan Mengembara'
+})
+
 const loading = useState('loading', () => false)
 const nuxtApp = useNuxtApp()
 nuxtApp.hook('page:finish', () => {
