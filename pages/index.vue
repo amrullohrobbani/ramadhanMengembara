@@ -68,7 +68,7 @@
                 <tr v-for="(value, key, index) in topAmalan" :key="key">
                   <th>{{ index + 1 }}</th>
                   <td class="capitalize">{{ key }}</td>
-                  <td>{{ value }}</td>
+                  <td>{{ value }} {{ satuan[key] }}</td>
                 </tr>
               </tbody>
             </table>
@@ -255,6 +255,14 @@ watch(users, () => {
   topAmal()
   amalanProgress()
 })
+
+const satuan = {
+  rawatib: "raka'at",
+  dhuha: "raka'at",
+  infaq: 'kali',
+  tahajud: "raka'at",
+  mengaji: 'Juz'
+}
 </script>
 
 <style scoped>
