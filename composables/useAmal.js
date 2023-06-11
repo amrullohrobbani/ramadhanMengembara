@@ -17,6 +17,7 @@ import dayjs from 'dayjs'
 export default async function () {
   const topAmalan = useState('topAmalan')
   const myProgress = useState('myProgress')
+
   const countExp = (params) => {
     const sum = params.reduce((accumulator, currentValue) => {
       return accumulator.exp + currentValue.value

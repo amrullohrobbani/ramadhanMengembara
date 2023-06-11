@@ -2,7 +2,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   ssr: false,
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-scheduler'],
   runtimeConfig: {
     public: {
       apiKey: 'AIzaSyB0As_6odp2Zy4VPW7-LSJ8NE3AS6fZrsU',

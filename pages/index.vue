@@ -4,12 +4,9 @@
     <div class="h-screen pt-[4rem] mx-auto bg-base-content overflow-y-hidden">
       <div class="flex w-full flex-col md:flex-row h-full">
         <div
-          class="flex flex-initial m-0 md:m-5 w-screen md:w-full overflow-x-auto"
+          class="flex flex-initial m-0 md:ml-5 md:my-5 w-screen md:w-full overflow-x-auto"
         >
-          <table
-            v-if="userList"
-            class="table w-full table-pin-rows rounded mt-3"
-          >
+          <table v-if="userList" class="table w-full table-pin-rows rounded">
             <thead>
               <tr>
                 <th colspan="3">Top Player</th>
@@ -45,7 +42,7 @@
                   <div class="flex items-center space-x-3">
                     <div>lvl. {{ level(user?.exp) }}</div>
                     <div class="flex items-center flex-initial w-28">
-                      <EmblemComponents :exp="user?.exp" />
+                      <img :src="`/${rank(level(user?.exp))}Icon.svg`" alt="" />
                     </div>
                     <div>
                       <div class="font-bold">{{ user?.exp }}</div>
@@ -56,10 +53,8 @@
             </tbody>
           </table>
         </div>
-        <div
-          class="flex flex-col w-full flex-initial m-0 md:m-5 h-full pr-0 md:pr-3"
-        >
-          <div class="flex m-3 w-full h-50 overflow-y-auto">
+        <div class="flex w-full m-0 md:m-5 grid grid-cols-1 pr-0 md:pr-3">
+          <div class="flex mr-3 w-full h-full overflow-y-auto">
             <table class="table table-zebra w-full table-pin-rows">
               <!-- head -->
               <thead>
@@ -76,9 +71,9 @@
               </tbody>
             </table>
           </div>
-          <div class="flex m-3 w-full">
+          <div class="flex mt-4 mr-3 w-full">
             <div
-              class="card card-compac w-full h-50 pt-5 bg-base-100 shadow-xl"
+              class="card card-compac w-full h-full pt-5 bg-base-100 shadow-xl"
             >
               <apexchart
                 height="250"
@@ -199,7 +194,7 @@ import { useState } from 'nuxt/app'
 import { ref, computed } from 'vue'
 import { startWindToast } from '@mariojgt/wind-notify/packages/index.js'
 
-const { ranking, level } = await useUsers()
+const { ranking, level, rank } = await useUsers()
 const users = useState('users')
 const myProgress = useState('myProgress', () => [])
 const userList = computed(() => {

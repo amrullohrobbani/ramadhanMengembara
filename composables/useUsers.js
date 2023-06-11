@@ -113,9 +113,33 @@ export default async function () {
     }
   }
 
+  const rank = (level) => {
+    switch (true) {
+      case inRange(level, 1, 5):
+        return 'Herald'
+      case inRange(level, 6, 10):
+        return 'Guardian'
+      case inRange(level, 11, 15):
+        return 'Crusader'
+      case inRange(level, 16, 20):
+        return 'Archon'
+      case inRange(level, 21, 25):
+        return 'Legend'
+      case inRange(level, 26, 30):
+        return 'Ancient'
+      case inRange(level, 31, 35):
+        return 'Divine'
+      case level > 35:
+        return 'Immortal'
+      default:
+        break
+    }
+  }
+
   return {
     users,
     ranking,
-    level
+    level,
+    rank
   }
 }
