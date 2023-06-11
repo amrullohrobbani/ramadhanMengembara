@@ -129,10 +129,8 @@ export default async function () {
         return 'Ancient'
       case inRange(level, 31, 35):
         return 'Divine'
-      case level > 35:
-        return 'Immortal'
       default:
-        break
+        return 'Immortal'
     }
   }
 

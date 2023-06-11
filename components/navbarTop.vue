@@ -13,7 +13,11 @@
             <span class="badge badge-sm indicator-item">{{
               level(profile?.exp)
             }}</span>
-            <img :src="`/${rank(level(profile?.exp))}Icon.svg`" alt="" />
+            <img
+              :src="`/${rank(level(profile?.exp))}Icon.svg`"
+              alt=""
+              class="w-full h-full"
+            />
           </div>
         </label>
         <ul
